@@ -2,12 +2,11 @@
 
 import asyncio
 import json
-import signal
 import aiohttp
-import websocket
-import urllib3
 
-from moviebot.config import DEBUG, TOKEN, TMDB_KEY
+from urllib.parse import urljoin, urlencode
+
+from moviebot.config import DEBUG, TOKEN, API_KEY
 
 RUNNING = True
 
@@ -16,20 +15,18 @@ RUNNING = True
 
 class MovieBot:
 
-    def __init__(self, token=TOKEN, tmdb_key = TMDB_KEY):
+    def __init__(self, token=TOKEN, api_key = API_KEY):
         self.token = token
         self.rtm = None
         self.cmd = {
             "help" : self.help,
-            "movie" : self.searchMovie,
-            "person" : self.searchPerson,
-            "series" : self.searchSeries
+            "movie" : self.searchMovie
+            # "person" : self.searchPerson,
+            # "series" : self.searchSeries
         }
-        self.tmdb_key = tmdb_key
-        self.headers = { 'Accept': 'application/json' }
-        self.url = "http://api.themoviedb.org/3/search/{0}?query={1}&api_key={2}"
-        self.http = urllib3.PoolManager()
-
+        self.api_key = api_key
+        self.headers = {'accept': 'application/json'}
+        self.url = 'http://api.themoviedb.org/3/search/'
 
     async def help(self, channel_id, team_id, query):
         """Display help message"""
@@ -39,23 +36,31 @@ class MovieBot:
 
     async def searchMovie(self, channel_id, team_id, query):
         """Search a movie."""
-        r = self.http.request('GET', self.url.format("movie", query, self.tmdb_key), headers=self.headers)
-        js = json.loads(r.data.decode('utf-8'))
-        return await self.send(js['results'][0], channel_id, team_id)
+        with aiohttp.ClientSession() as session:
+            url = urljoin(self.url, 'movie')
+            params = urlencode({'query': query, 'api_key': self.api_key, 'language' : 'fr'})
+            async with session.get(url, params=params, headers=self.headers) as response:
+                data = await response.json()
+                return await self.send(data['results'][0], channel_id, team_id)
 
 
     async def searchPerson(self, channel_id, team_id, query):
         """Search a person."""
-        r = self.http.request('GET', self.url.format("person", query, self.tmdb_key), headers=self.headers)
-        js = json.loads(r.data.decode('utf-8'))
-        return await self.send(js['results'][0], channel_id, team_id)
-
+        with aiohttp.ClientSession() as session:
+            url = urljoin(self.url, 'person')
+            params = urlencode({'query': query, 'api_key': self.api_key, 'language': 'fr'})
+            async with session.get(url, params=params, headers=self.headers) as response:
+                data = await response.json()
+                return await self.send(data['results'][0], channel_id, team_id)
 
     async def searchSeries(self, channel_id, team_id, query):
         """Serach a serie."""
-        r = self.http.request('GET', self.url.format("tv", query, self.tmdb_key), headers=self.headers)
-        js = json.loads(r.data.decode('utf-8'))
-        return await self.send(js['results'][0], channel_id, team_id)
+        with aiohttp.ClientSession() as session:
+            url = urljoin(self.url, 'tv')
+            params = urlencode({'query': query, 'api_key': self.api_key, 'language' : 'fr'})
+            async with session.get(url, params=params, headers=self.headers) as response:
+                data = await response.json()
+                return await self.send(data['results'][0], channel_id, team_id)
 
 
     async def send(self, message, channel_id, team_id):
@@ -67,19 +72,15 @@ class MovieBot:
 
 
     async def receive(self, message):
-        pass
         """Receive message from Slack"""
         if message.get('type') == 'message':
 
             # Channel ID
             channel_id = message.get('channel')
-
             # Team ID
             team_id = self.rtm['team']['id']
-
             # Bot ID
             bot_id = self.rtm['self']['id']
-
             # THE Message
             message_text = message.get('text')
 
@@ -92,9 +93,16 @@ class MovieBot:
                 if len(message_split) > 0 and recipient == '<@{0}>'.format(bot_id):
                     core_text = message_split[1].strip()
                     core_text_split = core_text.split()
-                    command = core_text_split[0].strip()
-                    query = core_text_split[1].strip()
-                    action = self.cmd.get(command) or self.help
+                    # The default action is help
+                    action = self.help
+                    query = ""
+                    # Check if a query exist
+                    # - If exist then get the action and the query
+                    if(len(core_text_split) > 1):
+                        command = core_text_split[0].strip()
+                        query = core_text_split[1].strip()
+                        action = self.cmd.get(command) or self.help
+
                     await action(channel_id, team_id, query)
 
 
@@ -142,6 +150,6 @@ def stop():
 if __name__ == "__main__":
    loop = asyncio.get_event_loop()
    loop.set_debug(DEBUG)
-   bot = MovieBot(TOKEN, TMDB_KEY)
+   bot = MovieBot(TOKEN, API_KEY)
    loop.run_until_complete(bot.connect())
    loop.close()
