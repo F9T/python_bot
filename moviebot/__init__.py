@@ -15,6 +15,9 @@ RUNNING = True
 
 class MovieBot:
 
+    def __doc__(self):
+        'Movie Bot\n'
+
     def __init__(self, token=TOKEN, api_key = API_KEY):
         self.token = token
         self.rtm = None
@@ -30,45 +33,48 @@ class MovieBot:
 
     async def help(self, channel_id, team_id, query):
         """Display help message"""
-        helpMsg = "Movie Bot help !"
+        helpMsg = 'Movie Bot help !\n' \
+                  ' - _movie "title"_ : Search for movies by title.\n' \
+                  ' - _person "name"_ : Search for people by name.\n' \
+                  ' - _serie "title"_ : Search for TV shows by title.\n' \
+                  ' - _help_ : Need help?'
         return await self.send(helpMsg, channel_id, team_id)
 
 
     async def searchMovie(self, channel_id, team_id, query):
         """Search a movie."""
-        with aiohttp.ClientSession() as session:
-            url = urljoin(self.url, 'movie')
-            params = urlencode({'query': query, 'api_key': self.api_key, 'language' : 'fr'})
-            async with session.get(url, params=params, headers=self.headers) as response:
-                data = await response.json()
-                return await self.send(data['results'][0], channel_id, team_id)
+        data = await self.requestApiTmdb('movie', query)
+        print(data)
 
 
     async def searchPerson(self, channel_id, team_id, query):
         """Search a person."""
-        with aiohttp.ClientSession() as session:
-            url = urljoin(self.url, 'person')
-            params = urlencode({'query': query, 'api_key': self.api_key, 'language': 'fr'})
-            async with session.get(url, params=params, headers=self.headers) as response:
-                data = await response.json()
-                return await self.send(data['results'][0], channel_id, team_id)
+        data = await self.requestApiTmdb('person', query)
+        print(data)
+
 
     async def searchSeries(self, channel_id, team_id, query):
-        """Serach a serie."""
+        """Search a serie."""
+        data = await self.requestApiTmdb('movie', query)
+        print(data)
+
+
+    async def requestApiTmdb(self, type, query):
+        """Perform a API call to The Movie Data Base"""
         with aiohttp.ClientSession() as session:
-            url = urljoin(self.url, 'tv')
+            url = urljoin(self.url, type)
             params = urlencode({'query': query, 'api_key': self.api_key, 'language' : 'fr'})
             async with session.get(url, params=params, headers=self.headers) as response:
                 data = await response.json()
-                return await self.send(data['results'][0], channel_id, team_id)
+                return data['results'][0]
 
 
     async def send(self, message, channel_id, team_id):
         """Sending message to Slack."""
-        return await api_call('chat.postMessage', {"type": "message",
-                                                   "channel": channel_id,
-                                                   "text": "{0}".format(message),
-                                                   "team": team_id})
+        return await api_call('chat.postMessage', {'type': 'message',
+                                                   'channel': channel_id,
+                                                   'text': "{0}".format(message),
+                                                   'team': team_id})
 
 
     async def receive(self, message):

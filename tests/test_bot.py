@@ -1,10 +1,10 @@
 """Test movieBot"""
-import movieBot
+import moviebot
 import pytest
 
 @pytest.fixture()
 def bot():
-	return movieBot.MovieBot()
+	return moviebot.MovieBot()
 
 def test_bot_receive(bot):
 	pass
