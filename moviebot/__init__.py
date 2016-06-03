@@ -1,4 +1,4 @@
-""""""
+"""moviebot package"""
 import asyncio
 
 from moviebot.bot import MovieBot

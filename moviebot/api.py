@@ -2,15 +2,16 @@
 import aiohttp
 from moviebot.config import TOKEN
 
-async def api_call(method, data=None, file=None, token=TOKEN):
+async def api_call(method, data, file, token):
     """Perform an API call to Slack.
+
    :param method: Slack API method name.
    :param type: str
    :param data: Form data to be sent.
    :param type: dict
    :param file: file pointer to send (for files.upload).
    :param type: file
-   :param token: OAuth2 tokn
+   :param token: token for identify the bot in Slack
    :param type: str
    """
     with aiohttp.ClientSession() as session:
