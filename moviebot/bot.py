@@ -28,9 +28,9 @@ class MovieBot:
         self.rtm = None
         self.cmd = {
             "help" : self.help,
-            "movie" : self.searchMovie
-            # "person" : self.searchPerson,
-            # "series" : self.searchSeries
+            "movie" : self.searchMovie,
+            "person" : self.searchPerson,
+            "series" : self.searchSeries
         }
         self.api_key = api_key
         self.headers = {'accept': 'application/json'}
@@ -44,7 +44,7 @@ class MovieBot:
                   ' - _person "name"_ : Search for people by name.\n' \
                   ' - _serie "title"_ : Search for TV shows by title.\n' \
                   ' - _help_ : Need help?'
-        return await self.send(helpMsg, channel_id, team_id)
+        await self.send(helpMsg, channel_id, team_id, False)
 
 
     async def searchMovie(self, channel_id, team_id, query):
@@ -52,22 +52,30 @@ class MovieBot:
         datas = await self.requestApiTmdb('movie', query)
         movieMsg=""
         for data in datas:
-            title=data['title']
-            overview=data['overview']
-            date=data['release_date']
-            poster=data['poster_path']
-            lang=data['original_language']
-            note=str(data['vote_average'])+"/10"
-            if lang in ['en', 'fr', 'de'] and overview is not "":
-                movieMsg = json.dumps([{"title": ("{0} - {1} - {2}".format(title, date, note)), "text": ("{0}".format(overview)), "image_url": ("{0}{1}".format(self.urlImage, poster))}])
-                await self.send(movieMsg, channel_id, team_id, True)
-#{'genre_ids': [16, 12, 10751], 'poster_path': '/bpwcrF7FExuLa2a54L7nwnwpPz4.jpg', 'vote_average': 7.53, 'id': 109445, 'video': False, 'vote_count': 2862, 'popularity': 4.971505, 'original_language': 'en', 'title': 'La Reine des neiges', 'adult': False, 'backdrop_path': '/irHmdlkdJphmk4HPfyAQfklKMbY.jpg', 'overview': 'Anna, une jeune fille aussi audacieuse qu’optimiste, se lance dans un incroyable voyage en compagnie de Kristoff, un montagnard expérimenté, et de son fidèle renne, Sven à la recherche de sa sœur, Elsa, la Reine des neiges qui a plongé le royaume d’Arendelle dans un hiver éternel…  En chemin, ils vont rencontrer de mystérieux trolls et un drôle de bonhomme de neige nommé Olaf, braver les conditions extrêmes des sommets escarpés et glacés, et affronter la magie qui les guette à chaque pas.', 'release_date': '2013-11-27', 'original_title': 'Frozen'}
+            filmMsg=json.dumps(await self.parseFilm(data))
+            await self.send(filmMsg, channel_id, team_id, True)
 
 
     async def searchPerson(self, channel_id, team_id, query):
         """Search a person."""
-        data = await self.requestApiTmdb('person', query)
-        print(data)
+        datas = await self.requestApiTmdb('person', query)
+        personMsg=""
+        filmsMsg=""
+        for data in datas:
+            filmsMsg=""
+            name=data['name']
+            films=data['known_for']
+            popularity=data['popularity']
+            for film in films:
+                type=film['media_type']
+                if type == "movie":
+                    title=film['title']
+                    date=film['release_date']
+                    filmsMsg=filmsMsg+"{0} - {1}\n".format(title, date)
+            personMsg = json.dumps([{"title": ("{0} - Popularité : {1}".format(name, popularity)), "text": ("{0}".format(filmsMsg))}])
+            json.dumps(personMsg)
+            await self.send(personMsg, channel_id, team_id, True)
+
 
 
     async def searchSeries(self, channel_id, team_id, query):
@@ -75,6 +83,19 @@ class MovieBot:
         data = await self.requestApiTmdb('movie', query)
         print(data)
 
+    async def parseFilm(self, data):
+        movieMsg=""
+        title = data['title']
+        overview = data['overview']
+        date = data['release_date']
+        poster = data['poster_path']
+        lang = data['original_language']
+        note = str(data['vote_average']) + "/10"
+        if lang in ['en', 'fr', 'de'] and overview is not "":
+            movieMsg = [{"title": ("{0} - {1} - {2}".format(title, date, note)),
+                                    "text": ("{0}".format(overview)),
+                                    "image_url": ("{0}{1}".format(self.urlImage, poster))}]
+        return movieMsg;
 
     async def requestApiTmdb(self, type, query):
         """Perform a API call to The Movie Data Base"""
