@@ -1,0 +1,15 @@
+MovieBot class
+--------------
+
+* :ref:`index`
+* :ref:`module`
+
+Description of the MovieBot class
+
+.. automodule:: moviebot
+.. autoclass:: MovieBot
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

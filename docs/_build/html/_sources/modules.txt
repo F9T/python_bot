@@ -1,0 +1,12 @@
+.. _module:
+
+moviebot package
+================
+
+:ref:`index`
+
+Content of moviebot package
+
+.. toctree::
+   :maxdepth: 4
+

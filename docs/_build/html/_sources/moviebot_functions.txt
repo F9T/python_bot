@@ -1,0 +1,10 @@
+Movie Bot functions
+-------------------
+
+:ref:`index`
+
+Desciption of functions used by the bot
+
+.. automodule:: moviebot
+.. autofunction:: api_call
+.. autofunction:: stop

@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>MovieBot class &mdash; MovieBot 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MovieBot 1 documentation" href="index.html" />
+    <link rel="up" title="moviebot package" href="modules.html" />
+    <link rel="next" title="Movie Bot functions" href="moviebot_functions.html" />
+    <link rel="prev" title="moviebot package" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="moviebot-class">
+<h1>MovieBot class<a class="headerlink" href="#moviebot-class" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="index.html#index"><span class="std std-ref">Welcome to MovieBot&#8217;s documentation!</span></a></li>
+<li><a class="reference internal" href="modules.html#module"><span class="std std-ref">moviebot package</span></a></li>
+</ul>
+<p>Description of the MovieBot class</p>
+<span class="target" id="module-moviebot"></span><p>Movie Bot : a Slack bot using asyncio</p>
+<p>This bot</p>
+<dl class="class">
+<dt id="moviebot.MovieBot">
+<em class="property">class </em><code class="descclassname">moviebot.</code><code class="descname">MovieBot</code><span class="sig-paren">(</span><em>token='xoxb-38196932679-YbXKPyGRLz46WTTic0bVPwww'</em>, <em>api_key='7721785a65a1f3f7b2ebc76d653a3632'</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.MovieBot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dl class="method">
+<dt id="moviebot.MovieBot.connect">
+<code class="descname">connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.MovieBot.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Joins Slack.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moviebot.MovieBot.help">
+<code class="descname">help</code><span class="sig-paren">(</span><em>channel_id</em>, <em>team_id</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.MovieBot.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display help message</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moviebot.MovieBot.receive">
+<code class="descname">receive</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.MovieBot.receive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receive message from Slack</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moviebot.MovieBot.requestApiTmdb">
+<code class="descname">requestApiTmdb</code><span class="sig-paren">(</span><em>type</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.MovieBot.requestApiTmdb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a API call to The Movie Data Base</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moviebot.MovieBot.searchMovie">
+<code class="descname">searchMovie</code><span class="sig-paren">(</span><em>channel_id</em>, <em>team_id</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.MovieBot.searchMovie" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search a movie.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moviebot.MovieBot.searchPerson">
+<code class="descname">searchPerson</code><span class="sig-paren">(</span><em>channel_id</em>, <em>team_id</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.MovieBot.searchPerson" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search a person.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moviebot.MovieBot.searchSeries">
+<code class="descname">searchSeries</code><span class="sig-paren">(</span><em>channel_id</em>, <em>team_id</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.MovieBot.searchSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search a serie.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moviebot.MovieBot.send">
+<code class="descname">send</code><span class="sig-paren">(</span><em>message</em>, <em>channel_id</em>, <em>team_id</em>, <em>isAttachment</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.MovieBot.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sending message to Slack.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">moviebot package</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">moviebot package</a></li>
+      <li>Next: <a href="moviebot_functions.html" title="next chapter">Movie Bot functions</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/moviebot_class.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Lovis Thomas & Rodrigues L. Daniel.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/moviebot_class.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

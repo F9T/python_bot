@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to MovieBot’s documentation! &mdash; MovieBot 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MovieBot 1 documentation" href="#" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-moviebot-s-documentation">
+<span id="index"></span><h1>Welcome to MovieBot&#8217;s documentation!<a class="headerlink" href="#welcome-to-moviebot-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-movie-bot">
+<h2>The Movie Bot<a class="headerlink" href="#the-movie-bot" title="Permalink to this headline">¶</a></h2>
+<p>This Slack bot lets you search for informations about movies, actors and TV shows.</p>
+<div class="section" id="movies">
+<h3>Movies<a class="headerlink" href="#movies" title="Permalink to this headline">¶</a></h3>
+<p>The Movie Bot can show you informations about a movie by sending him:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">@&lt;</span><span class="n">bot_name</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">movie</span> <span class="s2">&quot;title of movie&quot;</span>
+</pre></div>
+</div>
+<p>The response of bot is a list of several results. Each result contains :</p>
+<div class="line-block">
+<div class="line">Title - Release_date - Vote_average</div>
+<div class="line">Overview</div>
+<div class="line">Poster</div>
+</div>
+</div>
+<div class="section" id="actors">
+<h3>Actors<a class="headerlink" href="#actors" title="Permalink to this headline">¶</a></h3>
+<p>To show informations about a actor, send him a message like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">@&lt;</span><span class="n">bot_name</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">actor</span> <span class="s2">&quot;actor_name&quot;</span>
+</pre></div>
+</div>
+<p>The response :</p>
+<div class="line-block">
+<div class="line">Name - Vote_average</div>
+<div class="line">blablabla</div>
+</div>
+</div>
+<div class="section" id="tv-shows">
+<h3>TV Shows<a class="headerlink" href="#tv-shows" title="Permalink to this headline">¶</a></h3>
+<p>To show informations about a TV show, send to bot a message like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">@&lt;</span><span class="n">bot_name</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">serie</span> <span class="s2">&quot;title of tv show&quot;</span>
+</pre></div>
+</div>
+<p>The response :</p>
+<div class="line-block">
+<div class="line">Title - Vote_average</div>
+<div class="line">Blalba</div>
+</div>
+</div>
+</div>
+<div class="section" id="submodule">
+<h2>Submodule<a class="headerlink" href="#submodule" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-moviebot.api">
+<span id="moviebot-api"></span><h3>moviebot.api<a class="headerlink" href="#module-moviebot.api" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="moviebot.api.api_call">
+<code class="descclassname">moviebot.api.</code><code class="descname">api_call</code><span class="sig-paren">(</span><em>method</em>, <em>data=None</em>, <em>file=None</em>, <em>token='xoxb-38196932679-YbXKPyGRLz46WTTic0bVPwww'</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.api.api_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform an API call to Slack.
+:param method: Slack API method name.
+:param type: str
+:param data: Form data to be sent.
+:param type: dict
+:param file: file pointer to send (for files.upload).
+:param type: file
+:param token: OAuth2 tokn
+:param type: str</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="moviebot.api.stop">
+<code class="descclassname">moviebot.api.</code><code class="descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.api.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gracefully stop the bot.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-moviebot.bot">
+<span id="moviebot-bot"></span><h3>moviebot.bot<a class="headerlink" href="#module-moviebot.bot" title="Permalink to this headline">¶</a></h3>
+<p>Movie Bot : a Slack bot using asyncio</p>
+<p>This bot</p>
+<dl class="class">
+<dt id="moviebot.bot.MovieBot">
+<em class="property">class </em><code class="descclassname">moviebot.bot.</code><code class="descname">MovieBot</code><span class="sig-paren">(</span><em>token='xoxb-38196932679-YbXKPyGRLz46WTTic0bVPwww'</em>, <em>api_key='7721785a65a1f3f7b2ebc76d653a3632'</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dl class="method">
+<dt id="moviebot.bot.MovieBot.connect">
+<code class="descname">connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Joins Slack.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moviebot.bot.MovieBot.help">
+<code class="descname">help</code><span class="sig-paren">(</span><em>channel_id</em>, <em>team_id</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display help message</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moviebot.bot.MovieBot.receive">
+<code class="descname">receive</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.receive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receive message from Slack</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moviebot.bot.MovieBot.requestApiTmdb">
+<code class="descname">requestApiTmdb</code><span class="sig-paren">(</span><em>type</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.requestApiTmdb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a API call to The Movie Data Base</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moviebot.bot.MovieBot.searchMovie">
+<code class="descname">searchMovie</code><span class="sig-paren">(</span><em>channel_id</em>, <em>team_id</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.searchMovie" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search a movie.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moviebot.bot.MovieBot.searchPerson">
+<code class="descname">searchPerson</code><span class="sig-paren">(</span><em>channel_id</em>, <em>team_id</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.searchPerson" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search a person.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moviebot.bot.MovieBot.searchSeries">
+<code class="descname">searchSeries</code><span class="sig-paren">(</span><em>channel_id</em>, <em>team_id</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.searchSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search a serie.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moviebot.bot.MovieBot.send">
+<code class="descname">send</code><span class="sig-paren">(</span><em>message</em>, <em>channel_id</em>, <em>team_id</em>, <em>isAttachment</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sending message to Slack.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moviebot.config">
+<span id="moviebot-config"></span><h3>moviebot.config<a class="headerlink" href="#module-moviebot.config" title="Permalink to this headline">¶</a></h3>
+<p>Configuration of Movie Bot</p>
+<dl class="docutils">
+<dt>Content :</dt>
+<dd><ul class="first last simple">
+<li>The TOKEN for Slack</li>
+<li>The KEY for The Movie Data Base</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to MovieBot&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#the-movie-bot">The Movie Bot</a><ul>
+<li><a class="reference internal" href="#movies">Movies</a></li>
+<li><a class="reference internal" href="#actors">Actors</a></li>
+<li><a class="reference internal" href="#tv-shows">TV Shows</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#submodule">Submodule</a><ul>
+<li><a class="reference internal" href="#module-moviebot.api">moviebot.api</a></li>
+<li><a class="reference internal" href="#module-moviebot.bot">moviebot.bot</a></li>
+<li><a class="reference internal" href="#module-moviebot.config">moviebot.config</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Lovis Thomas & Rodrigues L. Daniel.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/index.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
