@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to MovieBot’s documentation! &mdash; MovieBot 1 documentation</title>
+    <title>Welcome to MovieBot’s documentation! &mdash; MovieBot 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1',
+        VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="MovieBot 1 documentation" href="#" />
+    <link rel="top" title="MovieBot 1.0 documentation" href="#" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -42,77 +42,84 @@
 <span id="index"></span><h1>Welcome to MovieBot&#8217;s documentation!<a class="headerlink" href="#welcome-to-moviebot-s-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="the-movie-bot">
 <h2>The Movie Bot<a class="headerlink" href="#the-movie-bot" title="Permalink to this headline">¶</a></h2>
-<p>This Slack bot lets you search for informations about movies, actors and TV shows.</p>
+<p>This <a class="reference external" href="https://api.slack.com/web">Slack</a> bot allows you to search for informations about movies, actors and TV shows.
+The informations come from <a class="reference external" href="https://www.themoviedb.org/documentation/api">The Movi Data Base</a>.</p>
 <div class="section" id="movies">
 <h3>Movies<a class="headerlink" href="#movies" title="Permalink to this headline">¶</a></h3>
 <p>The Movie Bot can show you informations about a movie by sending him:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">@&lt;</span><span class="n">bot_name</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">movie</span> <span class="s2">&quot;title of movie&quot;</span>
 </pre></div>
 </div>
-<p>The response of bot is a list of several results. Each result contains :</p>
-<div class="line-block">
-<div class="line">Title - Release_date - Vote_average</div>
-<div class="line">Overview</div>
-<div class="line">Poster</div>
-</div>
+<p>The bot&#8217;s response is a list of several results. Each result contains :</p>
+<blockquote>
+<div><ul class="simple">
+<li>Title - Release_date - Vote_average</li>
+<li>Overview</li>
+<li>Poster</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="actors">
 <h3>Actors<a class="headerlink" href="#actors" title="Permalink to this headline">¶</a></h3>
 <p>To show informations about a actor, send him a message like this:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">@&lt;</span><span class="n">bot_name</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">actor</span> <span class="s2">&quot;actor_name&quot;</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">@&lt;</span><span class="n">bot_name</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">person</span> <span class="s2">&quot;actor name&quot;</span>
 </pre></div>
 </div>
-<p>The response :</p>
-<div class="line-block">
-<div class="line">Name - Vote_average</div>
-<div class="line">blablabla</div>
-</div>
+<p>The bot&#8217;s response is a list of actors :</p>
+<blockquote>
+<div><ul class="simple">
+<li>Name - Popularity</li>
+<li>List of films</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="tv-shows">
 <h3>TV Shows<a class="headerlink" href="#tv-shows" title="Permalink to this headline">¶</a></h3>
 <p>To show informations about a TV show, send to bot a message like this:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">@&lt;</span><span class="n">bot_name</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">serie</span> <span class="s2">&quot;title of tv show&quot;</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">@&lt;</span><span class="n">bot_name</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">series</span> <span class="s2">&quot;title of tv show&quot;</span>
 </pre></div>
 </div>
 <p>The response :</p>
-<div class="line-block">
-<div class="line">Title - Vote_average</div>
-<div class="line">Blalba</div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li>Title - Vote_average</li>
+<li>Blalba</li>
+</ul>
+</div></blockquote>
 </div>
 </div>
 <div class="section" id="submodule">
 <h2>Submodule<a class="headerlink" href="#submodule" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-moviebot.api">
 <span id="moviebot-api"></span><h3>moviebot.api<a class="headerlink" href="#module-moviebot.api" title="Permalink to this headline">¶</a></h3>
+<p>Ensures communication with <a class="reference external" href="https://api.slack.com/web">Slack Web Api</a> .</p>
 <dl class="function">
 <dt id="moviebot.api.api_call">
-<code class="descclassname">moviebot.api.</code><code class="descname">api_call</code><span class="sig-paren">(</span><em>method</em>, <em>data=None</em>, <em>file=None</em>, <em>token='xoxb-38196932679-YbXKPyGRLz46WTTic0bVPwww'</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.api.api_call" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform an API call to Slack.
-:param method: Slack API method name.
-:param type: str
-:param data: Form data to be sent.
-:param type: dict
-:param file: file pointer to send (for files.upload).
-:param type: file
-:param token: OAuth2 tokn
-:param type: str</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="moviebot.api.stop">
-<code class="descclassname">moviebot.api.</code><code class="descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.api.stop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gracefully stop the bot.</p>
+<code class="descclassname">moviebot.api.</code><code class="descname">api_call</code><span class="sig-paren">(</span><em>method</em>, <em>data</em>, <em>file</em>, <em>token</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.api.api_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform an API call to Slack.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>method</strong> &#8211; (str) Slack API method name.</li>
+<li><strong>data</strong> &#8211; (dict) Form data to be sent.</li>
+<li><strong>file</strong> &#8211; (file) file pointer to send (for files.upload).</li>
+<li><strong>token</strong> &#8211; (str) token for identify the bot in Slack</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
 <div class="section" id="module-moviebot.bot">
 <span id="moviebot-bot"></span><h3>moviebot.bot<a class="headerlink" href="#module-moviebot.bot" title="Permalink to this headline">¶</a></h3>
 <p>Movie Bot : a Slack bot using asyncio</p>
-<p>This bot</p>
 <dl class="class">
 <dt id="moviebot.bot.MovieBot">
-<em class="property">class </em><code class="descclassname">moviebot.bot.</code><code class="descname">MovieBot</code><span class="sig-paren">(</span><em>token='xoxb-38196932679-YbXKPyGRLz46WTTic0bVPwww'</em>, <em>api_key='7721785a65a1f3f7b2ebc76d653a3632'</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">moviebot.bot.</code><code class="descname">MovieBot</code><span class="sig-paren">(</span><em>token</em>, <em>api_key</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <dl class="method">
 <dt id="moviebot.bot.MovieBot.connect">
@@ -123,43 +130,150 @@
 <dl class="method">
 <dt id="moviebot.bot.MovieBot.help">
 <code class="descname">help</code><span class="sig-paren">(</span><em>channel_id</em>, <em>team_id</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.help" title="Permalink to this definition">¶</a></dt>
-<dd><p>Display help message</p>
+<dd><p>Help message.</p>
+<p>Show the bot&#8217;s help message.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>channel_id</strong> &#8211; (int) ID of Slack&#8217;s channel</li>
+<li><strong>team_id</strong> &#8211; (int) ID of Team in Slack</li>
+<li><strong>query</strong> &#8211; (str) Search term</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="moviebot.bot.MovieBot.parseFilm">
+<code class="descname">parseFilm</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.parseFilm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the response of The Movie Data Base when search a movie.</p>
+<p>The answer from TMDB is a list of dict. Each dict contains informations about one movie.
+This method prepares the dict to be sent to Slack.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> &#8211; (dict) The data from TMDB</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return movieMsg:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">(list) Parsed message</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="moviebot.bot.MovieBot.receive">
 <code class="descname">receive</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.receive" title="Permalink to this definition">¶</a></dt>
-<dd><p>Receive message from Slack</p>
+<dd><p>Receives message from Slack.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>message</strong> &#8211; (json) Message from Slack</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="moviebot.bot.MovieBot.requestApiTmdb">
 <code class="descname">requestApiTmdb</code><span class="sig-paren">(</span><em>type</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.requestApiTmdb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform a API call to The Movie Data Base</p>
+<dd><p>Makes a request to <a class="reference external" href="https://www.themoviedb.org/documentation/api">The Movi Data Base API</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>type</strong> &#8211; (str) Type of request (movie, serie, actor)</li>
+<li><strong>query</strong> &#8211; (str) Search term</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return data:</th><td class="field-body"><p class="first last">(list) The results of request</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="moviebot.bot.MovieBot.searchMovie">
-<code class="descname">searchMovie</code><span class="sig-paren">(</span><em>channel_id</em>, <em>team_id</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.searchMovie" title="Permalink to this definition">¶</a></dt>
+<code class="descname">searchMovie</code><span class="sig-paren">(</span><em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.searchMovie" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search a movie.</p>
+<p>Receive the answer from TMDB, parses it and send it (via method &#8216;send()&#8217;) to Slack</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>query</strong> &#8211; (str) Search term</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="moviebot.bot.MovieBot.searchPerson">
 <code class="descname">searchPerson</code><span class="sig-paren">(</span><em>channel_id</em>, <em>team_id</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.searchPerson" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search a person.</p>
+<p>Receive the answer from TMDB, parses it and send it to Slack.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>channel_id</strong> &#8211; (int) ID of Slack&#8217;s channel</li>
+<li><strong>team_id</strong> &#8211; (int) ID of Team in Slack</li>
+<li><strong>query</strong> &#8211; (str) Search term</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="moviebot.bot.MovieBot.searchSeries">
 <code class="descname">searchSeries</code><span class="sig-paren">(</span><em>channel_id</em>, <em>team_id</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.searchSeries" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search a serie.</p>
+<p>Receive the answer from TMDB, parses it and send it to Slack.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>channel_id</strong> &#8211; (int) ID of Slack&#8217;s channel</li>
+<li><strong>team_id</strong> &#8211; (int) ID of Team in Slack</li>
+<li><strong>query</strong> &#8211; (str) Search term</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="moviebot.bot.MovieBot.send">
 <code class="descname">send</code><span class="sig-paren">(</span><em>message</em>, <em>channel_id</em>, <em>team_id</em>, <em>isAttachment</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.send" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sending message to Slack.</p>
+<dd><p>Sends message to Slack.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>message</strong> &#8211; (str) The message to send</li>
+<li><strong>channel_id</strong> &#8211; (int) ID of Slack&#8217;s channel</li>
+<li><strong>team_id</strong> &#8211; (int) ID of Team in Slack</li>
+<li><strong>isAttachment</strong> &#8211; (boolean) If attachment exist is true, false otherwise</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -167,12 +281,12 @@
 </div>
 <div class="section" id="module-moviebot.config">
 <span id="moviebot-config"></span><h3>moviebot.config<a class="headerlink" href="#module-moviebot.config" title="Permalink to this headline">¶</a></h3>
-<p>Configuration of Movie Bot</p>
+<p>Global configuration and other magic numbers.</p>
 <dl class="docutils">
-<dt>Content :</dt>
+<dt>The minimal requirements :</dt>
 <dd><ul class="first last simple">
-<li>The TOKEN for Slack</li>
-<li>The KEY for The Movie Data Base</li>
+<li>Slack API Token</li>
+<li>TMDB API Key</li>
 </ul>
 </dd>
 </dl>

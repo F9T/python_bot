@@ -1,4 +1,0 @@
-Package configuration
----------------------
-
-.. automodule:: moviebot.config

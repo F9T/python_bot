@@ -12,9 +12,6 @@ from moviebot.api import api_call
 
 RUNNING = True
 
-# URL for poster
-# https://image.tmdb.org/t/p/w396/
-
 class MovieBot:
     def __init__(self, token, api_key):
         """The main class of bot.
@@ -39,6 +36,8 @@ class MovieBot:
     async def help(self, channel_id, team_id, query):
         """Help message.
 
+        Show the bot's help message.
+
         :param channel_id: (int) ID of Slack's channel
         :param team_id: (int) ID of Team in Slack
         :param query: (str) Search term
@@ -48,11 +47,13 @@ class MovieBot:
                   ' - person "name" : Search for people by name.\n' \
                   ' - serie "title" : Search for TV shows by title.\n' \
                   ' - help : Need help?'
-        return await self.send(helpMsg, channel_id, team_id)
+        await self.send(helpMsg, channel_id, team_id)
 
 
     async def searchMovie(self, query):
         """Search a movie.
+
+        Receive the answer from TMDB, parses it and send it (via method 'send()') to Slack
 
         :param query: (str) Search term
         """
@@ -65,6 +66,8 @@ class MovieBot:
 
     async def searchPerson(self, channel_id, team_id, query):
         """Search a person.
+
+        Receive the answer from TMDB, parses it and send it to Slack.
 
         :param channel_id: (int) ID of Slack's channel
         :param team_id: (int) ID of Team in Slack
@@ -93,6 +96,8 @@ class MovieBot:
     async def searchSeries(self, channel_id, team_id, query):
         """Search a serie.
 
+        Receive the answer from TMDB, parses it and send it to Slack.
+
         :param channel_id: (int) ID of Slack's channel
         :param team_id: (int) ID of Team in Slack
         :param query: (str) Search term
@@ -101,11 +106,14 @@ class MovieBot:
         print(data)
 
     async def parseFilm(self, data):
-        """Parse the response of The Movie Data Base when search for a movie
+        """Parses the response of The Movie Data Base when search a movie.
 
-        :param data: (json) The data from TMDB
+        The answer from TMDB is a list of dict. Each dict contains informations about one movie.
+        This method prepares the dict to be sent to Slack.
 
-        :return movieMsg: (liste) Parsed message
+        :param data: (dict) The data from TMDB
+
+        :return movieMsg: (list) Parsed message
         """
         movieMsg=""
         title = data['title']
@@ -115,29 +123,32 @@ class MovieBot:
         lang = data['original_language']
         note = str(data['vote_average']) + "/10"
         if lang in ['en', 'fr', 'de'] and overview is not "":
+            # Prepare the message to return
             movieMsg = [{"title": ("{0} - {1} - {2}".format(title, date, note)),
                                     "text": ("{0}".format(overview)),
                                     "image_url": ("{0}{1}".format(self.urlImage, poster))}]
         return movieMsg;
 
     async def requestApiTmdb(self, type, query):
-        """Make a request to The Movie Data Base.
+        """Makes a request to `The Movi Data Base API <https://www.themoviedb.org/documentation/api>`_.
 
         :param type: (str) Type of request (movie, serie, actor)
         :param query: (str) Search term
 
-        :return data: (json) The results of request
+        :return data: (list) The results of request
         """
         with aiohttp.ClientSession() as session:
+            # Prepare the url
             url = urljoin(self.url, type)
             params = urlencode({'query': query, 'api_key': self.api_key, 'language' : 'fr'})
+            # Open a session
             async with session.get(url, params=params, headers=self.headers) as response:
                 data = await response.json()
                 return data['results']
 
 
     async def send(self, message, channel_id, team_id, isAttachment):
-        """Sending message to Slack.
+        """Sends message to Slack.
 
         :param message: (str) The message to send
         :param channel_id: (int) ID of Slack's channel
@@ -145,20 +156,22 @@ class MovieBot:
         :param isAttachment: (boolean) If attachment exist is true, false otherwise
         """
         if isAttachment is False:
-            return await api_call('chat.postMessage', {'type': 'message',
-                                                   'channel': channel_id,
-                                                   'text': "{0}".format(message),
-                                                   'attachment'
-                                                   'team': team_id})
+            # Post message if attachments not exists
+            await api_call('chat.postMessage', {'type': 'message',
+                                                'channel': channel_id,
+                                                'text': "{0}".format(message),
+                                                'attachment'
+                                                'team': team_id})
         else:
-            return await api_call('chat.postMessage', {'type': 'message',
-                                                   'channel': channel_id,
-                                                   'attachments': "{0}".format(message),
-                                                   'team': team_id})
+            # Post message if attachments exists
+            await api_call('chat.postMessage', {'type': 'message',
+                                                'channel': channel_id,
+                                                'attachments': "{0}".format(message),
+                                                'team': team_id})
 
 
     async def receive(self, message):
-        """Receive message from Slack.
+        """Receives message from Slack.
 
         :param message: (json) Message from Slack
         """

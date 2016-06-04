@@ -1,17 +1,14 @@
-""""""
+"""Ensures communication with `Slack Web Api <https://api.slack.com/web>`_ ."""
 import aiohttp
 from moviebot.config import TOKEN
 
-async def api_call(method, data=None, file=None, token=TOKEN):
+async def api_call(method, data, file, token):
     """Perform an API call to Slack.
-   :param method: Slack API method name.
-   :param type: str
-   :param data: Form data to be sent.
-   :param type: dict
-   :param file: file pointer to send (for files.upload).
-   :param type: file
-   :param token: OAuth2 tokn
-   :param type: str
+
+   :param method: (str) Slack API method name.
+   :param data: (dict) Form data to be sent.
+   :param file: (file) file pointer to send (for files.upload).
+   :param token: (str) token for identify the bot in Slack
    """
     with aiohttp.ClientSession() as session:
         form = aiohttp.FormData(data or {})
@@ -21,10 +18,3 @@ async def api_call(method, data=None, file=None, token=TOKEN):
         async with session.post('https://slack.com/api/{0}'.format(method), data=form) as response:
             assert 200 == response.status, ("{0} with {1} failed.".format(method, data))
             return await response.json()
-
-
-def stop():
-   """Gracefully stop the bot."""
-   global RUNNING
-   RUNNING = False
-   print("Stopping... closing connections.")

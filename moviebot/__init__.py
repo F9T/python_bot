@@ -1,8 +1,8 @@
-""""""
+"""moviebot package"""
 import asyncio
 
 from moviebot.bot import MovieBot
-from moviebot.api import api_call, stop
+from moviebot.api import api_call
 from moviebot.config import DEBUG, TOKEN, API_KEY
 
 
