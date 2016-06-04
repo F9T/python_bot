@@ -46,10 +46,10 @@ class MovieBot:
                   ' - person "name" : Search for people by name.\n' \
                   ' - serie "title" : Search for TV shows by title.\n' \
                   ' - help : Need help?'
-        await self.send(helpMsg, channel_id, team_id)
+        await self.send(helpMsg, channel_id, team_id, False)
 
 
-    async def searchMovie(self, query):
+    async def searchMovie(self, channel_id, team_id, query):
         """Search a movie.
 
         Receive the answer from TMDB, parses it and send it (via method 'send()') to Slack
@@ -147,13 +147,13 @@ class MovieBot:
                                                 'channel': channel_id,
                                                 'text': "{0}".format(message),
                                                 'attachment'
-                                                'team': team_id})
+                                                'team': team_id}, None, self.token)
         else:
             # Post message if attachments exists
             await api_call('chat.postMessage', {'type': 'message',
                                                 'channel': channel_id,
                                                 'attachments': "{0}".format(message),
-                                                'team': team_id})
+                                                'team': team_id}, None, self.token)
 
 
     async def receive(self, message):
@@ -174,22 +174,23 @@ class MovieBot:
 
             # Splits message in half, with recipient on the left side, and the core text on the other.
             if (isinstance(message_text, str)):
-                message_split = message_text.split(':', 1)
+                message_split = message_text.split(':', 2)
                 recipient = message_split[0].strip()
 
                 # Check if message is adressed to this bot
                 if len(message_split) > 0 and recipient == '<@{0}>'.format(bot_id):
-                    core_text = message_split[1].strip()
-                    core_text_split = core_text.split()
+                    # core_text = message_split[1].strip()
+                    # core_text_split = core_text.split()
                     # The default action is help
                     action = self.help
                     query = ""
                     # Check if a query exist
                     # - If exist then get the action and the query
-                    if(len(core_text_split) > 1):
-                        command = core_text_split[0].strip()
-                        query = core_text_split[1].strip()
-                        action = self.cmd.get(command) or self.help
+                    if(len(message_split) > 2):
+                        if(len(message_split[2].strip()) > 1):
+                            command = message_split[1].strip()
+                            query = message_split[2].strip()
+                            action = self.cmd.get(command) or self.help
 
                     await action(channel_id, team_id, query)
 
