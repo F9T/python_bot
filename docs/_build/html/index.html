@@ -42,8 +42,8 @@
 <span id="index"></span><h1>Welcome to MovieBot&#8217;s documentation!<a class="headerlink" href="#welcome-to-moviebot-s-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="the-movie-bot">
 <h2>The Movie Bot<a class="headerlink" href="#the-movie-bot" title="Permalink to this headline">¶</a></h2>
-<p>This <a class="reference external" href="https://api.slack.com/web">Slack</a> bot allows you to search for informations about movies, actors and TV shows.
-The informations come from <a class="reference external" href="https://www.themoviedb.org/documentation/api">The Movi Data Base</a>.</p>
+<p>This <a class="reference external" href="https://api.slack.com/web">Slack</a> bot allows you to search for informations about movies and actors.
+The informations come from <a class="reference external" href="https://www.themoviedb.org/documentation/api">The Movie Data Base</a>.</p>
 <div class="section" id="movies">
 <h3>Movies<a class="headerlink" href="#movies" title="Permalink to this headline">¶</a></h3>
 <p>The Movie Bot can show you informations about a movie by sending him:</p>
@@ -70,20 +70,6 @@ The informations come from <a class="reference external" href="https://www.themo
 <div><ul class="simple">
 <li>Name - Popularity</li>
 <li>List of films</li>
-</ul>
-</div></blockquote>
-</div>
-<div class="section" id="tv-shows">
-<h3>TV Shows<a class="headerlink" href="#tv-shows" title="Permalink to this headline">¶</a></h3>
-<p>To show informations about a TV show, send to bot a message like this:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">@&lt;</span><span class="n">bot_name</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">series</span> <span class="s2">&quot;title of tv show&quot;</span>
-</pre></div>
-</div>
-<p>The response :</p>
-<blockquote>
-<div><ul class="simple">
-<li>Title - Vote_average</li>
-<li>Blalba</li>
 </ul>
 </div></blockquote>
 </div>
@@ -183,7 +169,7 @@ This method prepares the dict to be sent to Slack.</p>
 <dl class="method">
 <dt id="moviebot.bot.MovieBot.requestApiTmdb">
 <code class="descname">requestApiTmdb</code><span class="sig-paren">(</span><em>type</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.requestApiTmdb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Makes a request to <a class="reference external" href="https://www.themoviedb.org/documentation/api">The Movi Data Base API</a>.</p>
+<dd><p>Makes a request to <a class="reference external" href="https://www.themoviedb.org/documentation/api">The Movie Data Base API</a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -220,26 +206,6 @@ This method prepares the dict to be sent to Slack.</p>
 <dt id="moviebot.bot.MovieBot.searchPerson">
 <code class="descname">searchPerson</code><span class="sig-paren">(</span><em>channel_id</em>, <em>team_id</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.searchPerson" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search a person.</p>
-<p>Receive the answer from TMDB, parses it and send it to Slack.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>channel_id</strong> &#8211; (int) ID of Slack&#8217;s channel</li>
-<li><strong>team_id</strong> &#8211; (int) ID of Team in Slack</li>
-<li><strong>query</strong> &#8211; (str) Search term</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="moviebot.bot.MovieBot.searchSeries">
-<code class="descname">searchSeries</code><span class="sig-paren">(</span><em>channel_id</em>, <em>team_id</em>, <em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#moviebot.bot.MovieBot.searchSeries" title="Permalink to this definition">¶</a></dt>
-<dd><p>Search a serie.</p>
 <p>Receive the answer from TMDB, parses it and send it to Slack.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -314,7 +280,6 @@ This method prepares the dict to be sent to Slack.</p>
 <li><a class="reference internal" href="#the-movie-bot">The Movie Bot</a><ul>
 <li><a class="reference internal" href="#movies">Movies</a></li>
 <li><a class="reference internal" href="#actors">Actors</a></li>
-<li><a class="reference internal" href="#tv-shows">TV Shows</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#submodule">Submodule</a><ul>

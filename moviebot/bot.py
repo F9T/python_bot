@@ -24,8 +24,7 @@ class MovieBot:
         self.cmd = {
             "help" : self.help,
             "movie" : self.searchMovie,
-            "person" : self.searchPerson,
-            "series" : self.searchSeries
+            "person" : self.searchPerson
         }
         self.api_key = api_key
         self.headers = {'accept': 'application/json'}
@@ -92,19 +91,6 @@ class MovieBot:
             await self.send(personMsg, channel_id, team_id, True)
 
 
-
-    async def searchSeries(self, channel_id, team_id, query):
-        """Search a serie.
-
-        Receive the answer from TMDB, parses it and send it to Slack.
-
-        :param channel_id: (int) ID of Slack's channel
-        :param team_id: (int) ID of Team in Slack
-        :param query: (str) Search term
-        """
-        data = await self.requestApiTmdb('movie', query)
-        print(data)
-
     async def parseFilm(self, data):
         """Parses the response of The Movie Data Base when search a movie.
 
@@ -130,7 +116,7 @@ class MovieBot:
         return movieMsg;
 
     async def requestApiTmdb(self, type, query):
-        """Makes a request to `The Movi Data Base API <https://www.themoviedb.org/documentation/api>`_.
+        """Makes a request to `The Movie Data Base API <https://www.themoviedb.org/documentation/api>`_.
 
         :param type: (str) Type of request (movie, serie, actor)
         :param query: (str) Search term

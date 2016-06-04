@@ -2,8 +2,8 @@
 The Movie Bot
 =============
 
-This `Slack <https://api.slack.com/web>`_ bot allows you to search for informations about movies, actors and TV shows.
-The informations come from `The Movi Data Base <https://www.themoviedb.org/documentation/api>`_.
+This `Slack <https://api.slack.com/web>`_ bot allows you to search for informations about movies and actors.
+The informations come from `The Movie Data Base <https://www.themoviedb.org/documentation/api>`_.
 
 Movies
 ------
@@ -29,15 +29,3 @@ The bot's response is a list of actors :
 
     * Name - Popularity
     * List of films
-
-TV Shows
---------
-
-To show informations about a TV show, send to bot a message like this: ::
-
-    @<bot_name>: series "title of tv show"
-
-The response :
-
-    * Title - Vote_average
-    * Blalba
